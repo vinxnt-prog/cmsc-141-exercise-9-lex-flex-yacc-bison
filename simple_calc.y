@@ -10,7 +10,8 @@
 // Section 1b: YACC/Bison declarations
 /*declare tokens*/
 %token NUMBER
-%token ADD SUB MUL DIV
+%left ADD SUB
+%left MUL DIV
 %token EOL QUIT
 
 %%  // Section 2: Grammar rules
@@ -30,6 +31,7 @@ factor: term				//default $$ = $1
   ;
 
 term: NUMBER 				//default $$ = $1
+	| '(' exp ')' 		{$$ = $2;}
   ;
 %%
 
