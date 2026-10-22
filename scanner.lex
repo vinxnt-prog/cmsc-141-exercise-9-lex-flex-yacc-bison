@@ -3,7 +3,7 @@
   #include <stdlib.h>
 %}
 
-NUM	-?([0-9]+(\.[0-9]*)?|\.[0-9]+)
+NUM	([0-9]+(\.[0-9]*)?|\.[0-9]+)
 VAR	[a-z]
 
 %%
@@ -11,8 +11,9 @@ VAR	[a-z]
 "-"			{return SUB;}
 "/"			{return DIV;}
 "*"			{return MUL;}
-"("           		{ return '('; }
-")"            		{ return ')'; }
+"^"     { return POW; }
+"("     { return '('; }
+")"     { return ')'; }
 {NUM}		{yylval.numval = atof(yytext); return NUMBER;}
 \n			{return EOL;}
 "="			{return '=';}
@@ -21,4 +22,3 @@ VAR	[a-z]
 "exit"		{return QUIT;}
 .			{printf("\nUnrecognized string %c\n", *yytext);}
 %%
-
