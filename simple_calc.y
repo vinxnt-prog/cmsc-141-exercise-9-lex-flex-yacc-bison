@@ -1,6 +1,8 @@
 /*simplest version of calculator: from O'Reilly Media, Inc. 2021*/
 %{  // Section 1a: C declarations
   #include<stdio.h>
+  #include<stdlib.h>
+  #define YYSTYPE double
   int yylex();
   void yyerror(char *s);
 %}
@@ -13,7 +15,7 @@
 
 %%  // Section 2: Grammar rules
 calclist: /*nothing*/		//matches at beginning of input
-  | calclist exp EOL 		{printf("=%d\n", $2); } //EOL is end of an expression
+  | calclist exp EOL 		{printf("=%f\n", $2); } //EOL is end of an expression
   | calclist QUIT 			{printf("Exitting..."); return 0;}
   ;
 
