@@ -1,0 +1,3 @@
+lex.yy.c
+simple_calc.tab.h
+simple_calc.tab.c
