@@ -55,19 +55,30 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     NUMBER = 258,                  /* NUMBER  */
-    ADD = 259,                     /* ADD  */
-    SUB = 260,                     /* SUB  */
-    MUL = 261,                     /* MUL  */
-    DIV = 262,                     /* DIV  */
-    EOL = 263,                     /* EOL  */
-    QUIT = 264                     /* QUIT  */
+    VARNAME = 259,                 /* VARNAME  */
+    ADD = 260,                     /* ADD  */
+    SUB = 261,                     /* SUB  */
+    MUL = 262,                     /* MUL  */
+    DIV = 263,                     /* DIV  */
+    EOL = 264,                     /* EOL  */
+    QUIT = 265                     /* QUIT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 12 "simple_calc.y"
+
+	double numval;
+	char varval;
+
+#line 79 "simple_calc.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

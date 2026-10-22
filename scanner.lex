@@ -1,10 +1,10 @@
 %{
-  #define YYSTYPE double
   #include "simple_calc.tab.h"
   #include <stdlib.h>
 %}
 
 NUM	-?([0-9]+(\.[0-9]*)?|\.[0-9]+)
+VAR	[a-z]
 
 %%
 "+"			{return ADD;}
@@ -13,8 +13,10 @@ NUM	-?([0-9]+(\.[0-9]*)?|\.[0-9]+)
 "*"			{return MUL;}
 "("           		{ return '('; }
 ")"            		{ return ')'; }
-{NUM}		{yylval = atof(yytext); return NUMBER;}
+{NUM}		{yylval.numval = atof(yytext); return NUMBER;}
 \n			{return EOL;}
+"="			{return '=';}
+{VAR}		{yylval.varval = yytext[0]; return VARNAME;}
 [[:space:]]	{/*ignore white space*/}
 "exit"		{return QUIT;}
 .			{printf("\nUnrecognized string %c\n", *yytext);}
