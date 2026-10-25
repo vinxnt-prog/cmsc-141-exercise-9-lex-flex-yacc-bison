@@ -29,6 +29,7 @@
 calclist: /*nothing*/		//matches at beginning of input
   | calclist exp EOL 		{printf("=%f\n", $2); } //EOL is end of an expression
   | calclist asgn EOL
+  | calclist error EOL  { yyerrok; } // for error catching invalid inputs, wait for next input
   | calclist QUIT 			{printf("Exitting..."); return 0;}
   ;
 
